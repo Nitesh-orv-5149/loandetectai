@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-WEB</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+    background-color: black;
+    color: red ;
+    font-family: 'Poppins', sans-serif;
+}
+
+.title {
+    text-align: center;
+    font-weight: 700; /* Extra Bold */
+}
+
+.title p {
+    color: white ;
+}
+
+/* General Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Container with Flexbox */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Hide checkbox */
+#sidebar-toggle {
+    display: none;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    margin-left: -250px;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(to left, #ff0000, #3b0000); /* Red to Black */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    position: relative;
+    transition: margin 0.3s;
+    border-top-right-radius: 20px; /* Rounded top right */
+    border-bottom-right-radius: 20px; /* Rounded bottom right */
+}
+
+/* Sidebar Links */
+.sidebar h1 {
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3); /* Slight Black Transparency */
+    border-radius: 5px; /* Rounded edges */
+    margin: 10px; /* Add spacing between links */
+    transition: 0.3s; /* Smooth transition */
+}
+
+.sidebar a:hover {
+    background: rgba(255, 0, 0, 0.7); /* Dark Red */
+    border-radius: 20px; /* More rounded on hover */
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Content Section */
+.content {
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+/* Menu Button (☰) */
+.menu-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Sidebar Toggle Effect */
+#sidebar-toggle:checked + .sidebar {
+    margin-left: 0;
+}
+#sidebar-toggle:checked ~ .content {
+    margin-left: -250px;
+}
+
+/* Form Container */
+.form-container {
+    max-width: 400px;
+    background: rgb(255, 0, 0);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(93, 0, 0, 0.2);
+    margin: 50px auto;  /* Adjust this value to move it up */
+    text-align: center;
+    margin-top: -70vh;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label, h2 {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #ffffff;
+}
+
+input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submit Button */
+button {
+    margin-top: 15px;
+    background-color: rgb(86, 0, 0);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: black;
+}
+
+/* Result Section */
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #000;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <input type="checkbox" id="sidebar-toggle">
+        <div class="sidebar">
+            <label for="sidebar-toggle" class="close-btn">×</label>
+            <h1>Menu</h1>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contacts</a>
+            <a href="#">Sign In</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <label for="sidebar-toggle" class="menu-btn">☰</label>
+            <div class="title">
+                <h1>Welcome to AI Loan Approval Predictor</h1>
+                <p>Enter your details to check loan approval status.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>Loan Approval Form</h2>
+        <form id="loanForm" action="/" method="post">
+            <label for="income">Income ($):</label>
+            <input type="number" id="income" name="income" required>
+    
+            <label for="credit_score">Credit Score:</label>
+            <input type="number" id="credit-score" name="credit_score" required>
+    
+            <label for="loan_amount">Loan Amount ($):</label>
+            <input type="number" id="loan-amount" name="loan_amount" required>
+    
+            <label for="loan_term">Loan Term (Years):</label>
+            <input type="number" id="loan-term" name="loan_term" required>
+    
+            <label for="debt_to_income">Debt-to-Income Ratio (%):</label>
+            <input type="number" id="debt-ratio" name="debt_to_income" required>
+    
+            <button type="submit">Check Loan Approval</button>
+        </form>
+    
+        {% if result %}
+            <p class="result">Loan Status: {{ result }}</p>
+        {% endif %}
+    
+
+</body>
+</html>
